@@ -21,11 +21,13 @@ options.add_argument("--disable-blink-features=AutomationControlled")
 # headless mode
 options.headless = True
 driver = webdriver.Chrome(
-#options = options #add "#" before "options" to start test with CHROME
+    options=options  # add "#" before "options" to start test with CHROME
 )
 actions = ActionChains(driver)
 # OPEN GO-REMOTE AND LOGIN AS "OLENA PEDASH"
 driver.get("https://a-qa-web.azurewebsites.net/go-remote")
+
+
 def test_SignIn():
     print("LogIn")
     wait = WebDriverWait(driver, 10)
@@ -55,8 +57,9 @@ def test_SignIn():
     time.sleep(8)
 
     # OPEN MAIN MENU AND CHECKING USER'S ROLE/COMPANY
-    mainmenu = driver.find_element(By.XPATH, "/html/body/app-root/app-board/app-main-layout/app-new-navbar/nav/div/div/button/span[1]/span[1]" or "/html/body/app-root/app-main-layout/app-new-navbar/nav/div/div/button/span[1]/span[1]")
-    #mainmenu.click()
+    mainmenu = driver.find_element(By.XPATH,
+                                   "/html/body/app-root/app-board/app-main-layout/app-new-navbar/nav/div/div/button/span[1]/span[1]" or "/html/body/app-root/app-main-layout/app-new-navbar/nav/div/div/button/span[1]/span[1]")
+    # mainmenu.click()
     time.sleep(2)
     mainmenu.click()
     time.sleep(2)
@@ -65,7 +68,6 @@ def test_SignIn():
     print("Role/Company:")
     print(role_title.text)
     print("Current url:", driver.current_url)
-
     time.sleep(2)
     #
     pass
@@ -90,6 +92,8 @@ def test_jobseeker():
         print("TEST FAILED. Curent role:", JobSeekerroletitle, format(e))
         print("Current url:", driver.current_url)
     pass
+
+
 def test_createprofile():
     time.sleep(3)
 
@@ -102,7 +106,8 @@ def test_createprofile():
     driver.find_element(By.XPATH,
                         "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[1]/div[1]/input").send_keys(
         "AutoTestPosition")
-    driver.find_element(By.XPATH, "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[1]/div[2]/div[1]/mat-select/div/div[2]/div").click()
+    driver.find_element(By.XPATH,
+                        "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[1]/div[2]/div[1]/mat-select/div/div[2]/div").click()
     time.sleep(2)
     driver.find_element(By.XPATH, "/html/body/div[3]/div[2]/div/div/div/mat-option[2]/span").click()
     time.sleep(2)
@@ -116,12 +121,15 @@ def test_createprofile():
     driver.find_element(By.XPATH, "/html/body/div[3]/div[2]/div/div/div/mat-option[3]/span").click()
     time.sleep(2)
     driver.find_element(By.XPATH,
-                        "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[3]/div[2]/mat-chip-list/div/input").send_keys("Angular")
+                        "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[3]/div[2]/mat-chip-list/div/input").send_keys(
+        "Angular")
     time.sleep(2)
     driver.find_element(By.XPATH, "/html/body/div[3]/div/div/div/mat-option[1]").click()
-    wait = WebDriverWait(driver, 15)
-    inpu = wait.until(EC.element_to_be_clickable(driver.find_element(By.XPATH, "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[3]/div[3]/mat-select/div/div[2]")))
-    #inpu.switch_to.active_element(driver.find_element(By.XPATH, "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[3]/div[3]/mat-select/div/div[2]/div"))
+    wait = WebDriverWait(driver, 20)
+    # inpu = wait.until(EC.element_to_be_clickable(driver.find_element(By.XPATH, "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[3]/div[3]/mat-select/div/div[2]")))
+    # inpu = wait.until(EC.visibility_of(driver.find_element(By.XPATH, "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[3]/div[3]/mat-select/div/div[2]/div")))
+    inpu = driver.find_element(By.XPATH,
+                               "//*[@id='mat-select-value-7']/span" or "//*[@id='mat-select-6']/div/div[2]" or "//*[@id='mat-select-6']/div" or "//*[@id='mat-select-6']")
     inpu.click()
     time.sleep(2)
     driver.find_element(By.XPATH, "/html/body/div[3]/div[2]/div/div/div/mat-option[3]/span").click()
@@ -154,7 +162,7 @@ def test_Delete():
     time.sleep(10)
     wait = WebDriverWait(driver, 15)
     Delete = wait.until(EC.element_to_be_clickable(driver.find_element(By.XPATH,
-                                 "/html/body/app-root/app-board/app-main-layout/app-dashboard-page/div/div/app-profiles-dashboard/div[2]/ul/li[1]/div/div[2]/div/button")))
+                                                                       "/html/body/app-root/app-board/app-main-layout/app-dashboard-page/div/div/app-profiles-dashboard/div[2]/ul/li[1]/div/div[2]/div/button")))
     Delete.click()
     time.sleep(2)
     Delete1 = driver.find_element(By.XPATH, "/html/body/div[3]/div[2]/div/div/div/button[2]")
