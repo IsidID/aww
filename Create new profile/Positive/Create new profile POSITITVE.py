@@ -1,3 +1,4 @@
+import pytest
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium import webdriver
 import time
@@ -9,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver import ActionChains
 from selenium.common.exceptions import NoSuchElementException
-import unittest
+
 
 
 #NON BROWSER MODE
