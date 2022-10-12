@@ -24,7 +24,7 @@ options.headless = True
 driver = webdriver.Chrome(
 #options = options #add "#" before "options" to start test with CHROME
 )
-
+#
 # OPEN GO-REMOTE AND LOGIN AS "OLENA PEDASH"
 driver.get("https://a-qa-web.azurewebsites.net/go-remote")
 print("SIGN IN")
