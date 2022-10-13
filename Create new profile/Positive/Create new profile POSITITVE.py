@@ -21,7 +21,7 @@ options.add_argument("--disable-blink-features=AutomationControlled")
 # headless mode
 options.headless = True
 driver = webdriver.Chrome(
-    options=options  # add "#" before "options" to start test with CHROME
+    #options=options  # add "#" before "options" to start test with CHROME
 )
 actions = ActionChains(driver)
 # OPEN GO-REMOTE AND LOGIN AS "OLENA PEDASH"

@@ -328,3 +328,5 @@ def test_resume():
     except Exception as e:
         print("data in portfolio is not link")
     pass
+    sleep(4)
+    driver.quit()
