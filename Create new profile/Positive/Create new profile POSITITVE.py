@@ -99,10 +99,8 @@ def test_createprofile():
 
     #
     print("Create a new profile")
-    createbutton = driver.find_element(By.XPATH,
-                                       "/html/body/app-root/app-board/app-main-layout/app-dashboard-page/div/div/app-profiles-dashboard/div[2]/app-search-block/div[1]/a/span[1]/span")
-    createbutton.click()
-    time.sleep(5)
+
+
     driver.find_element(By.XPATH,
                         "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[1]/div[1]/input").send_keys(
         "AutoTestPosition")
