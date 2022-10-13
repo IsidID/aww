@@ -22,7 +22,7 @@ options.add_argument("--disable-blink-features=AutomationControlled")
 #headless mode
 options.headless = True
 driver = webdriver.Chrome(
-options = options #add "#" before "options" to start test with CHROME
+#options = options #add "#" before "options" to start test with CHROME
 )
 #
 # OPEN GO-REMOTE AND LOGIN AS "OLENA PEDASH"
@@ -57,7 +57,7 @@ def test_SignIn():
     time.sleep(8)
 
     #OPEN MAIN MENU AND CHECKING USER'S ROLE/COMPANY
-    mainmenu = driver.find_element(By.XPATH, "/html/body/app-root/app-main-layout/app-new-navbar/nav/div/div/button/span[1]/span[1]" or "/html/body/app-root/app-board/app-main-layout/app-new-navbar/nav/div/div/button/span[1]/span[1]")
+    mainmenu = driver.find_element(By.XPATH, "/html/body/app-root/app-board/app-main-layout/app-new-navbar/nav/div/div/button/span[1]/span[2]/img" or "/html/body/app-root/app-board/app-main-layout/app-new-navbar/nav/div/div/button/span[1]")
     mainmenu.click()
     time.sleep(2)
     driver.switch_to.active_element
