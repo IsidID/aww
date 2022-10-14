@@ -190,5 +190,5 @@ def test_Delete():
     print("Profile deleted. Quit browser")
     time.sleep(3)
     # time.sleep(15)
-    driver.quit()
     pass
+    driver.quit()
