@@ -21,7 +21,7 @@ options.add_argument("--disable-blink-features=AutomationControlled")
 # headless mode
 options.headless = True
 driver = webdriver.Chrome('C:/Users/isid/PycharmProjects/aww/chromedriver.exe',
-                          options=options  # add "#" before "options" to start test with CHROME
+                          #options=options  # add "#" before "options" to start test with CHROME
                           )
 actions = ActionChains(driver)
 # OPEN GO-REMOTE AND LOGIN AS "OLENA PEDASH"
@@ -42,7 +42,7 @@ def test_SignIn():
     time.sleep(2)
     password = wait.until(EC.element_to_be_clickable(
         (By.XPATH, "/html/body/app-root/app-landing-layout/app-sign-in/div/form/div[2]/div[3]/div[2]/div/input")))
-    password.click()
+    password.click()  
     password.send_keys("Password1")
     password.send_keys(Keys.RETURN)
     time.sleep(5)

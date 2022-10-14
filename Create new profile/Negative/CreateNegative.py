@@ -26,7 +26,7 @@ options.add_argument("--disable-blink-features=AutomationControlled")
 # headless mode
 options.headless = True
 driver = webdriver.Chrome('C:/Users/isid/PycharmProjects/aww/chromedriver.exe',
-                          options=options  # add "#" before "options" to start test with CHROME
+                          #options=options  # add "#" before "options" to start test with CHROME
                           )
 actions = ActionChains(driver)
 driver.maximize_window()
@@ -36,7 +36,7 @@ driver.get("https://a-qa-web.azurewebsites.net/go-remote")
 
 
 def test_SignIn():
-    print("LogIn")
+    print(":")
     wait = WebDriverWait(driver, 30)
     SignIn = wait.until(EC.element_to_be_clickable(
         (By.XPATH, "/html/body/app-root/app-landing-layout/app-landing-navbar/nav/div/div[2]/div/button/span[1]")))
@@ -57,7 +57,7 @@ def test_SignIn():
                                    "/html/body/app-root/app-board/app-main-layout/app-new-navbar/nav/div/div/button/span[1]/span[1]" or "/html/body/app-root/app-main-layout/app-new-navbar/nav/div/div/button/span[1]/span[1]").text
     try:
         assert 'Company' or 'Customer' or 'Admin' or 'Employee' or 'JobSeeker' in LOGGEDIN
-        print("User is Logged In")
+        print("Logged in")
     except Exception as e:
         print("TEST FAILED")
         print("User is NOT LOGGED IN", format(e))
@@ -81,7 +81,7 @@ def test_SignIn():
 
 
 def test_jobseeker():
-    print("Switch to JobSeeker role")
+    print(":")
     wait = WebDriverWait(driver, 10)
     JobSeekerrole = driver.find_element(By.XPATH, "//*[@id='mat-menu-panel-0']/div/div[3]/div[5]/div[1]/span")
     JobSeekerrole.click()
@@ -93,7 +93,7 @@ def test_jobseeker():
                                              "/html/body/app-root/app-board/app-main-layout/app-new-navbar/nav/div/div/button/span[1]/span[1]").text
     try:
         assert 'JobSeeker' in JobSeekerroletitle
-        print("Test passed. Current role:", JobSeekerroletitle)
+        print("Current role:", JobSeekerroletitle)
         print("Current url:", driver.current_url)
     except Exception as e:
         print("TEST FAILED. Curent role:", JobSeekerroletitle, format(e))
@@ -118,9 +118,10 @@ def test_position_and_rates():
                                  "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[1]/div[1]/mat-error").text
     try:
         assert 'This field is required' in posreq
-        print("Your Position is clear")
+        print(":")
+        print('"Position" empty field test Passed')
     except Exception as e:
-        print("Your position data not deleted")
+        print('!!!"Position" empty field test Failed')
 
     time.sleep(2)
     rate = driver.find_element(By.XPATH,
@@ -130,28 +131,31 @@ def test_position_and_rates():
                                   "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[1]/div[2]/div[1]/mat-error").text
     try:
         assert 'This field is required' in typereq
-        print("Rate type is not choosed")
+        print('"Rate type" non choosed type test Passed')
     except Exception as e:
-        print("Your rate type data is choosed")
+        print('!!!"Rate type" non choosed type test Failed')
     time.sleep(2)
     time.sleep(2)
     rate.send_keys(Keys.CONTROL + "a")
     rate.send_keys(Keys.DELETE, Keys.TAB)
     time.sleep(2)
     ratereq = driver.find_element(By.XPATH,
-                                  "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[1]/div[2]/div[2]/mat-error").text
+                                  "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[1]/div[2]/div[2]/mat-error" or "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[1]/div[2]/div[2]/input" or "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[1]/div[2]/div[2]").text
     try:
         assert 'This field is required' in ratereq
-        print("Your Rate data is clear")
+        print('"Rate data" empty field test Passed')
     except Exception as e:
-        print("Your rate data not deleted")
-    time.sleep(2)
+        print('!!!"Rate data" empty field test Failed')
+    time.sleep(3)
+    driver.switch_to.parent_frame()
     rate.send_keys("asddsaas")
+    rate.send_keys(Keys.TAB)
+    sleep(2)
     try:
-        assert 'Use only numbers with up to 2 points precision!' in ratereq
-        print("Rate text data is not available")
+        assert 'Use only numbers with up to 2 points precision!' or 'This field is required' in ratereq
+        print('"Rate data" field with text data test Passed')
     except Exception as e:
-        print("Your rate data can be text")
+        print('!!!"Rate data" field with text data test Failed')
     time.sleep(2)
     rate.send_keys(Keys.CONTROL + "a")
     rate.send_keys(Keys.DELETE)
@@ -164,10 +168,10 @@ def test_position_and_rates():
                                     "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[1]/div[2]/div[2]/mat-error").text
     # time.sleep(4)
     try:
-        assert 'Use only numbers with up to 2 points precision!' in rate2poin
-        print("Rate data with up 2 points is not available")
+        assert 'Use only numbers with up to 2 points precision!' or 'This field is required' in rate2poin
+        print('"Rate data" field with up 2 points test Passed')
     except Exception as e:
-        print("Your rate data can be with more than 2 points precision")
+        print('!!!"Rate data" field with up 2 points test Failed')
     time.sleep(2)
     rate.send_keys(Keys.CONTROL + "a")
     rate.send_keys(Keys.DELETE)
@@ -180,9 +184,9 @@ def test_position_and_rates():
                                    "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[1]/div[2]/div[2]/mat-error").text
     try:
         assert 'Use only numbers with up to 2 points precision!' in ratesymb
-        print("Rate symbol data is not available")
+        print('"Rate data" field with symbols data test Passed')
     except Exception as e:
-        print("Your rate data can be symbols")
+        print('!!!"Rate data" field with symbols data test Failed')
     time.sleep(2)
     rate.send_keys(Keys.CONTROL + "a")
     rate.send_keys(Keys.DELETE)
@@ -195,9 +199,9 @@ def test_position_and_rates():
                                    "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[1]/div[2]/div[2]/mat-error").text
     try:
         assert 'Use only numbers with up to 2 points precision!' in rateminus
-        print("Rate negative numbers data is not available")
+        print('"Rate data" field with negative numbers test Passed')
     except Exception as e:
-        print("Your rate data can be negative numbers")
+        print('!!!"Rate data" field with negative numbers test Failed')
     time.sleep(2)
     rate.send_keys(Keys.CONTROL + "a")
     rate.send_keys(Keys.DELETE)
@@ -210,9 +214,10 @@ def test_position_and_rates():
                                   "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[1]/div[2]/div[2]/mat-error").text
     try:
         assert 'Please enter a value between 0 and 999999.99!' in ratenum
-        print("Rate overmore data is not available")
+        print('"Rate data" field with more than 999999.99 data test Passed')
     except Exception as e:
-        print("Your rate data can be not between 0 and 999999.99!")
+        print('!!!"Rate data" field with more than 999999.99 data test Failed')
+    print("Current url:", driver.current_url)
     time.sleep(6)
     pass
 
@@ -232,9 +237,11 @@ def test_foreign_lang():
                                   "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[2]/div[3]/mat-error").text
     try:
         assert 'This field is required' in langreq
-        print("Foreign language field is empty")
+        print(":")
+        print('"Foreign language" empty field test Passed')
     except Exception as e:
-        print("Dont choosed language lvl")
+        print('!!!"Foreign language" empty field test Failed')
+    print("Current url:", driver.current_url)
     time.sleep(2)
     pass
 
@@ -255,9 +262,11 @@ def test_skills():
                                     "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[3]/div[2]/mat-error").text
     try:
         assert 'This field is required' in Skillsqeq
-        print("Skills fields is empty")
+        print(':')
+        print('"Skills" empty field test Passed')
     except Exception as e:
-        print("Dont choosed skills")
+        print('!!!"Skills" empty field test Failed')
+    print("Current url:", driver.current_url)
     time.sleep(2)
     pass
 
@@ -275,11 +284,12 @@ def test_resume():
                                     "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[4]/div[2]/mat-error" or "//*[@id='mat-error-0']").text
     try:
         assert 'Please enter correct URL address' in resumereq
-        print("Resume link checked")
+        print(':')
+        print('"Resume" link test Passed')
         resume.send_keys(Keys.CONTROL + "a")
         resume.send_keys(Keys.DELETE)
     except Exception as e:
-        print("no resume link")
+        print('!!!"Resume" link test Failed')
 
     time.sleep(2)
 
@@ -297,9 +307,9 @@ def test_resume():
         assert 'LinkedIn invalid' in resumelinkedinreq
         resumelinkedin.send_keys(Keys.CONTROL + "a")
         resumelinkedin.send_keys(Keys.DELETE)
-        print("LinkedIn link checked")
+        print('"LinkedIn" link test Passed')
     except Exception as e:
-        print("no linkedin link")
+        print('!!!"LinkedIn" link test Failed')
 
     time.sleep(2)
 
@@ -324,9 +334,11 @@ def test_resume():
                                    "/html/body/app-root/app-board/app-main-layout/app-profile-form-page-update/div/form/div[4]/div[5]/mat-error").text
     try:
         assert 'It must be link' in portlink
-        print("Portfolio link checked")
+        print('"Portfolio" link test Passed')
     except Exception as e:
-        print("data in portfolio is not link")
+        print('!!!"Portfolio" link test Failed')
+
+    print("Current url:", driver.current_url)
     pass
     sleep(4)
     driver.quit()
