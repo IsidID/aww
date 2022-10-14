@@ -242,4 +242,4 @@ def test_jobseeker():
     time.sleep(15)
     pass
 
-driver.quit()
+    driver.quit()
