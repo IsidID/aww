@@ -10,6 +10,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver import ActionChains
 from selenium.common.exceptions import NoSuchElementException
 import pytest
+import requests
 
 
 #NON BROWSER MODE
@@ -26,6 +27,7 @@ driver = webdriver.Chrome('C:/Users/isid/PycharmProjects/aww/chromedriver.exe',
 #
 # OPEN GO-REMOTE AND LOGIN AS "OLENA PEDASH"
 driver.get("https://a-qa-web.azurewebsites.net/go-remote")
+
 def test_SignIn():
     print("SIGN IN")
     wait = WebDriverWait(driver, 20)
