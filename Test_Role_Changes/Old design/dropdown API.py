@@ -8,7 +8,6 @@ class TestDropDown:
         assert response.status_code == 200
         assert response.json().get('token')
         token = response.json().get('token')
-        # print(response.json().get('token'))
         assert response.json().get('person') == {'dob': None,
                                                  'emailAddress': '1olena.pedash@awwcor.com',
                                                  'firstName': 'Olena',
@@ -17,7 +16,7 @@ class TestDropDown:
                                                  'mobilePhone': None,
                                                  'personId': None}
         assert isinstance(response.json().get('token'), str)
-        # print(response.text)
+        print(token, response.status_code)
         return token
 
     def test_adminrole(self):
@@ -34,6 +33,7 @@ class TestDropDown:
                                  headers={"Authorization": "Bearer " + tokenadm},
                                  json=adminroledata)
         assert adminrole.status_code == 200
+        print(tokenadm, adminrole.status_code)
         return tokenadm
 
     def test_companyrole(self):
@@ -57,6 +57,7 @@ class TestDropDown:
                  "isSet": False}]},
             {"levelName": "JobSeeker", "levelCode": 16, "isSet": False, "companyEmployers": None}]
         assert companynrole.status_code == 200
+        print(tokencom, companynrole.status_code)
         return tokencom
 
     def test_customerrole(self):
@@ -81,6 +82,7 @@ class TestDropDown:
                  "isSet": False}]},
             {"levelName": "JobSeeker", "levelCode": 16, "isSet": False, "companyEmployers": None}]
         assert customerrole.status_code == 200
+        print(tokencust, customer.status_code)
         return tokencust
 
     def test_employeerole(self):
@@ -105,6 +107,7 @@ class TestDropDown:
                  "isSet": True}]},
             {"levelName": "JobSeeker", "levelCode": 16, "isSet": False, "companyEmployers": None}]
         assert employeerole.status_code == 200
+        print(tokenemplo, employee.status_code)
         return tokenemplo
 
     def test_jobseekerrole(self):
@@ -129,6 +132,7 @@ class TestDropDown:
                  "isSet": False}]},
             {"levelName": "JobSeeker", "levelCode": 16, "isSet": True, "companyEmployers": None}]
         assert jobseekerrole.status_code == 200
+        print(tokenjobs, jobseeker.status_code)
         return tokenjobs
 
 
