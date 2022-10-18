@@ -1,7 +1,7 @@
 import requests
 
 #merge
-class TestDropDown:
+class TestDropDown():
     def test_login(self):
         body = {"email": "1olena.pedash@awwcor.com", "password": "Password1"}
         response = requests.post("https://a-qa-api-security.azurewebsites.net/Account/login", json=body)
