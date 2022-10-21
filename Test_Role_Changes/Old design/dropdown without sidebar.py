@@ -13,18 +13,21 @@ import pytest
 import requests
 
 
-#NON BROWSER MODE
+# NON BROWSER MODE
 # options
 options = webdriver.ChromeOptions()
 
-#Blink
+# Blink
 options.add_argument("--disable-blink-features=AutomationControlled")
 
-#headless mode
+# headless mode
+options.headless = True
 driver = webdriver.Chrome('C:/Users/isid/PycharmProjects/aww/chromedriver.exe',
                           options=options  # add "#" before "options" to start test with CHROME
                           )
-#
+actions = ActionChains(driver)
+driver.maximize_window()
+driver.implicitly_wait(30)
 # OPEN GO-REMOTE AND LOGIN AS "OLENA PEDASH"
 driver.get("https://a-qa-web.azurewebsites.net/go-remote")
 
